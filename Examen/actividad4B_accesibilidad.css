@@ -1,0 +1,95 @@
+/* actividad4B_accesibilidad.css */
+
+/* 1) Importación de CSS principal */
+@import url('styles.css');
+
+body.protanopia {
+  /* ausencia de rojo */
+  --accent-color:  #656221;
+  --accent-hover:  #d1c21a;
+  --success-color: #56b4e9;
+  --error-color:   #d55e00;
+}
+
+body.deuteranopia {
+  /* ausencia de verde */
+  --accent-color:  #c1a31a;
+  --accent-hover:  #e6cb1a;
+  --success-color: #0072b2;
+  --error-color:   #d55e00;
+}
+
+body.tritanopia {
+  /* ausencia de azul */
+  --accent-color:  #d55e00;
+  --accent-hover:  #cc79a7;
+  --success-color: #009e73;
+  --error-color:   #f0e442;
+}
+
+/* modal selección de paletas */
+   .modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+  .modal.show {
+    display: flex !important;
+  }
+  
+  .modal-content {
+    background: var(--bg-primary);
+    padding: 1.5rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 320px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  
+  .modal-close {
+    float: right;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+  
+  .modal-content h3 {
+    margin: 0 0 1rem;
+    color: var(--accent-color);
+  }
+  
+  .palette-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  
+  .palette-option {
+    padding: 0.75rem;
+    border: none;
+    border-radius: 5px;
+    background: var(--bg-secondary);
+    color: var(--text-primary);           
+    font-weight: 600;                    
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+  }
+  
+  .palette-option:hover {
+    background: var(--accent-hover);
+    color: #ffffff;                       
+  }
+
+   .modal {
+    display: none;                /* oculto por defecto */
+  }
+  .modal.show {
+    display: flex !important;     /* forzar que se vea cuando tenga la clase .show */
+  }
+
+  

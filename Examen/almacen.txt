@@ -1,0 +1,5 @@
+Celular	44	12000.00
+Laptop	22	15000.00
+Mouse	64	1400.00
+Teclado	31	2400.00
+Tablet	42	6800.00
