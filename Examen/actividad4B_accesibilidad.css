@@ -91,5 +91,3 @@ body.tritanopia {
   .modal.show {
     display: flex !important;     /* forzar que se vea cuando tenga la clase .show */
   }
-
-  

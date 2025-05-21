@@ -1,0 +1,21 @@
+
+
+
+@import url('styles.css');
+
+/* 2) CURSOR CROSSHAIR EN TODA LA PÁGINA */
+* {
+  cursor: crosshair;
+}
+
+/* 3) TEXTO SELECCIONABLE (I-BEAM) EN ELEMENTOS DE TEXTO */
+h1, h2, h3, h4, h5, h6,
+p, span, label, li, dt, dd, a {
+  cursor: text !important;
+}
+
+/* 4) FORZAR CURSOR DE CRUZ EN BOTONES */
+button,
+.btn {
+  cursor: crosshair !important;
+}

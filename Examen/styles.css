@@ -334,3 +334,22 @@ body.text-xlarge {
     display: none;
   }
   
+/* 
+   CURSOR CROSSHAIR 
+  
+/* 1) Por defecto, cruz en todos los elementos */
+* {
+    cursor: crosshair;
+  }
+  
+  button,
+.btn {
+  cursor: crosshair !important;
+}
+
+  /* 2) Solo los elementos de texto llevan I-beam */
+  h1, h2, h3, h4, h5, h6,
+  p, span, label, li, dt, dd, a {
+    cursor: text !important;
+  }
+

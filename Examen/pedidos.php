@@ -26,6 +26,8 @@ $inventory = loadInventory();
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Realizar Pedido</title>
   <link id="main-css" rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="actividad4C.css">
+
   <link id="alt-css"  rel="stylesheet" href="actividad4B_accesibilidad.css" disabled>
   <script src="accessibility.js" defer></script>
 </head>
