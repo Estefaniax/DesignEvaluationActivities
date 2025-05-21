@@ -1,0 +1,378 @@
+/* ===================================================================
+   styles.css - Estilos principales del Mini Blog
+   =================================================================== */
+
+/* -------------------------------
+   VARIABLES DE DISEÑO
+---------------------------------*/
+:root {
+  --bg: #ffffff;
+  --fg: #111111;
+  --muted: #555555;
+  --header-bg: #000000;
+  --link: #222222;
+  --link-hover: #6c9be2;
+  --accent: #6c9be2;
+  --accent-hover: hsl(216,100%,83%);
+  --card-bg: #ffffff;
+  --card-shadow: rgba(0,0,0,0.04);
+  --radius: 8px;
+  --spacing: 1rem;
+  --font-base: 'Inter', sans-serif;
+  --header-height: 64px;
+}
+/* ——————————————————————————
+   Imágenes responsivas
+———————————————————————————————————— */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Si usas la clase .post-image */
+
+.post-image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: var(--spacing) 0;
+}
+
+/* -------------------------------
+   RESET & GLOBAL
+---------------------------------*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 100%;      /* Base font size from browser settings */
+  cursor: crosshair;    /* Cursor global crosshair */
+}
+body {
+  font-family: var(--font-base);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--fg);
+  background-color: var(--bg);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Text cursor (I-beam) for all text elements, including headings, meta, paragraphs, labels, inputs */
+h1, h2, h3, h4, h5, h6,
+p, span, label, input, textarea,
+.post-meta, .meta {
+  cursor: text;
+}
+
+/* Interactive elements keep crosshair */
+button,
+a,
+.post, .post-card,
+.panel-card,
+header, nav, footer, main, section {
+  cursor: crosshair;
+}
+
+/* -------------------------------
+   HEADER
+---------------------------------*/
+header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: var(--header-height);
+  background-color: var(--header-bg);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--spacing);
+  z-index: 1000;
+}
+header .logo {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+header nav {
+  display: flex;
+  gap: var(--spacing);
+}
+header nav a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity .2s;
+}
+header nav a:hover {
+  opacity: .7;
+}
+
+/* -------------------------------
+   BARRA ACCESIBILIDAD (botones)
+---------------------------------*/
+#accessibility-bar {
+  display: flex;
+  gap: .5rem;
+  position: relative;
+  z-index: 1000;
+}
+#accessibility-bar button {
+  background: #ff0066;
+  color: #ffffff;
+  border: none;
+  padding: .4rem .8rem;
+  border-radius: var(--radius);
+  font-size: .85rem;
+  cursor: crosshair;
+  transition: background .2s, transform .1s;
+}
+#accessibility-bar button:hover {
+  background: #e6005c;
+}
+
+/* -------------------------------
+   Menú simulación Daltonismo
+---------------------------------*/
+#vision-modes {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  background: var(--bg) !important;
+  border: 1px solid var(--muted) !important;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  display: none;
+  flex-direction: column;
+  padding: .5rem;
+  min-width: 160px;
+  z-index: 2000;
+}
+#vision-modes button {
+  background: none;
+  border: none;
+  text-align: left;
+  padding: .4rem .6rem;
+  font-size: .9rem;
+  color: var(--fg) !important;
+  cursor: pointer;
+  transition: background .2s;
+}
+#vision-modes button:hover {
+  background: rgba(0,0,0,0.05);
+}
+
+/* -------------------------------
+   CONTENEDOR PRINCIPAL
+---------------------------------*/
+.container {
+  flex: 1;
+  width: 100%;
+  max-width: 800px;
+  margin: calc(var(--spacing)*2) auto;
+  padding: 0 var(--spacing);
+}
+
+/* -------------------------------
+   TIPOGRAFÍA
+---------------------------------*/
+h1 {
+  font-size: 2rem;
+  margin-bottom: var(--spacing);
+}
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: .5rem;
+  color: var(--link);
+}
+p {
+  margin-bottom: var(--spacing);
+  color: var(--muted);
+}
+
+/* -------------------------------
+   POSTS / TARJETAS
+---------------------------------*/
+.post {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 8px var(--card-shadow);
+  padding: var(--spacing);
+  margin-bottom: calc(var(--spacing)*1.5);
+  transition: transform .2s, box-shadow .2s;
+}
+.post:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px var(--card-shadow);
+}
+.post h2 a {
+  color: var(--link);
+  text-decoration: none;
+  transition: color .2s;
+}
+.post h2 a:hover {
+  color: var(--link-hover);
+}
+.post .meta {
+  font-size: .9rem;
+  color: var(--muted);
+  margin-top: .5rem;
+}
+
+/* -------------------------------
+   FORMULARIOS
+---------------------------------*/
+form {
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}
+form label {
+  font-weight: 500;
+  color: var(--fg);
+}
+form input[type="text"],
+form input[type="password"],
+form textarea,
+form input[type="file"] {
+  width: 100%;
+  padding: .75rem;
+  border: 1px solid #ddd;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-family: var(--font-base);
+  transition: border-color .2s;
+}
+form input:focus,
+form textarea:focus {
+  outline: none;
+  border-color: var(--link);
+}
+form button {
+  align-self: flex-start;
+  background: var(--link-hover);
+  color: #ffffff;
+  padding: .7rem 1.4rem;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background .2s, transform .1s;
+}
+form button:hover {
+  background: #005bb5;
+  transform: translateY(-1px);
+}
+
+/* -------------------------------
+   FOOTER
+---------------------------------*/
+footer {
+  text-align: center;
+  padding: var(--spacing);
+  font-size: .85rem;
+  color: var(--muted);
+  border-top: 1px solid #eee;
+}
+
+/* ====================================================
+   PANEL DE ADMINISTRACIÓN (main.php)
+   ==================================================== */
+.panel-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing);
+  margin-top: var(--spacing);
+}
+@media (max-width: 768px) {
+  .panel-container {
+    grid-template-columns: 1fr;
+  }
+}
+.panel-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 8px var(--card-shadow);
+  padding: calc(var(--spacing) * 1.5);
+}
+.panel-card h2 {
+  font-size: 1.25rem;
+  margin-bottom: var(--spacing);
+  color: var(--link);
+}
+.form-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing);
+}
+.btn-primary {
+  background: var(--link-hover);
+  color: #ffffff;
+  padding: .75rem 1.5rem;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background .2s, transform .1s;
+}
+.btn-primary:hover {
+  background: #005bb5;
+  transform: translateY(-1px);
+}
+.panel-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing);
+}
+.post-card {
+  background: var(--bg);
+  border: 1px solid #eee;
+  border-radius: var(--radius);
+  padding: var(--spacing);
+  transition: box-shadow .2s, transform .2s;
+}
+.post-card:hover {
+  box-shadow: 0 4px 16px var(--card-shadow);
+  transform: translateY(-2px);
+}
+.post-card h3 a {
+  color: var(--link);
+  text-decoration: none;
+  transition: color .2s;
+}
+.post-card .meta {
+  font-size: .85rem;
+  color: var(--muted);
+}
+
+/* ====================================================
+   Vistazos de acción (editar / eliminar) en posts
+   ==================================================== */
+.post-card .post-header,
+.post .post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing);
+}
+.actions {
+  display: flex;
+  gap: .5rem;
+}
+.action-icon {
+  display: inline-flex;
+  align-items: center;
+  color: var(--accent);
+  transition: color .2s;
+}
+.action-icon:hover {
+  color: var(--accent-hover);
+}
+.action-icon .icon {
+  width: 1.4rem;
+  height: 1.4rem;
+}

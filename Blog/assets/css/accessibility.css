@@ -1,0 +1,160 @@
+
+
+/* -------------------------------
+   Variables por defecto
+---------------------------------*/
+:root {
+  --vision-bg: #ffffff;
+  --vision-border: #ccc;
+  --vision-btn-color: #333;
+}
+
+/* -------------------------------
+   MODO OSCURO AJUSTADO
+---------------------------------*/
+body.dark-mode {
+  --bg: #121212;
+  --fg: #e0e0e0;
+  --muted: #b0b0b0;
+  --header-bg: #000000;
+  --link: #82aaff;
+  --link-hover: #a3ccff;
+  --card-bg: #1f1f1f;
+  --card-shadow: rgba(0,0,0,0.5);
+  /* accesibilidad */
+  --acc-btn-bg: #000000;
+  --acc-btn-color: #ffffff;
+  --vision-bg: #474747;
+  --vision-border: #333333;
+  --vision-btn-color: #e0e0e0;
+}
+
+/* -------------------------------
+   ALTO CONTRASTE
+---------------------------------*/
+body.high-contrast {
+  --bg: #000000;
+  --fg: #FFFFFF;
+  --muted: #FFFFFF;
+  --header-bg: #000000;
+  --link: #FFFF00;
+  --link-hover: #FFFF00;
+  --card-bg: #000000;
+  --card-shadow: rgba(255,255,255,0.2);
+  --btn-bg: #FFFF00;
+  --btn-color: #000000;
+  --btn-border: #000000;
+  --input-bg: #000000;
+  --input-color: #FFFFFF;
+  --input-border: #FFFFFF;
+  --acc-btn-bg: #FFFF00;
+  --acc-btn-color: #000000;
+  --vision-bg: #000000;
+  --vision-border: #FFFFFF;
+  --vision-btn-color: #FFFFFF;
+}
+
+/* -------------------------------
+   Daltonismos
+---------------------------------*/
+body.protanopia   { filter: sepia(.5) hue-rotate(45deg) contrast(1.2); }
+body.deuteranopia { filter: sepia(.5) hue-rotate(20deg) contrast(1.2); }
+body.tritanopia   { filter: sepia(.5) hue-rotate(90deg) contrast(1.2); }
+
+/* -------------------------------
+   Aumentar texto (3 niveles)
+   Ahora actúa sobre <html> para escalar rems
+---------------------------------*/
+html.enlarge-1 { font-size: 120%; }
+html.enlarge-2 { font-size: 140%; }
+html.enlarge-3 { font-size: 160%; }
+
+/* -------------------------------
+   Barra de accesibilidad (botones)
+---------------------------------*/
+#accessibility-bar {
+  display: flex;
+  align-items: center;
+}
+#accessibility-bar button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  font-size: .9rem;
+  background: var(--acc-btn-bg);
+  color: var(--acc-btn-color);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity .3s;
+}
+#accessibility-bar button:hover {
+  opacity: .8;
+}
+
+/* -------------------------------
+   Ajustes generales modo oscuro / contraste
+---------------------------------*/
+body.dark-mode   header,
+body.high-contrast header {
+  background: var(--header-bg);
+}
+body.dark-mode   #accessibility-bar button,
+body.high-contrast #accessibility-bar button {
+  background: var(--acc-btn-bg);
+  color: var(--acc-btn-color);
+  border: 2px solid var(--btn-border);
+}
+
+/* -------------------------------
+   Inputs y formularios en contraste
+---------------------------------*/
+body.high-contrast input,
+body.high-contrast textarea {
+  background: var(--input-bg);
+  color: var(--input-color);
+  border: 2px solid var(--input-border);
+}
+body.high-contrast form button {
+  background: var(--btn-bg);
+  color: var(--btn-color);
+  border: 2px solid var(--btn-border);
+}
+
+
+#vision-modes {
+  position: absolute;
+  display: none;
+  flex-direction: column;
+  min-width: 110px;
+  padding: 0.5rem 0;
+  background: var(--vision-bg) !important;
+  border: 1px solid var(--vision-border) !important;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 2000;
+  opacity: 1;
+  pointer-events: auto;
+}
+#vision-modes button {
+  background: none !important;
+  border: none;
+  text-align: left;
+  width: 100%;
+  padding: 0.4rem 1rem;
+  font-size: 0.9rem;
+  color: var(--vision-btn-color) !important;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#vision-modes button:hover {
+  background: rgba(0,0,0,0.05);
+}
+
+
+body:not(.dark-mode):not(.high-contrast) #vision-modes {
+  background: #ffffff !important;
+  border-color: #ccc !important;
+}
+body:not(.dark-mode):not(.high-contrast) #vision-modes button {
+  color: #333333 !important;
+}
