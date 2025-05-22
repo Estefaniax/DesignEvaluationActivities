@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <p>¿No tienes cuenta? <a href="register.php">Regístrate aquí</a></p>
   </div>
 
-  <footer>&copy; <?= date('Y') ?> Mini Blog. Citlaly Estefanía Samano López.</footer>
+  <footer>&copy; <?= date('Y') ?> Mini Blog. Estefanía  López.</footer>
   <script src="assets/js/accessibility.js"></script>
 </body>
 </html>

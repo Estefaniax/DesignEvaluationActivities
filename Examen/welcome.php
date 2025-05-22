@@ -9,7 +9,6 @@ require_once 'functions.php';
   <title>Bienvenido a la Tienda</title>
   <link id="main-css" rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="actividad4C.css">
-
   <link id="alt-css"  rel="stylesheet" href="actividad4B_accesibilidad.css" disabled>
   <script src="accessibility.js" defer></script>
 </head>

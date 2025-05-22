@@ -117,7 +117,7 @@ $user  = $_SESSION['user'] ?? null;
 
   <!-- FOOTER -->
   <footer>
-    &copy; <?= date('Y') ?> Mini Blog. Citlaly Estefanía Samano López.
+    &copy; <?= date('Y') ?> Mini Blog. Estefanía  López.
   </footer>
 
   <script src="assets/js/accessibility.js"></script>
