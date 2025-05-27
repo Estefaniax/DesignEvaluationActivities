@@ -1,27 +1,25 @@
-
-
-
 /* ──────────────────────────────────────────────────────────────────
-   VARIABLES
+   VARIABLES DE ACCESIBILIDAD
 ────────────────────────────────────────────────────────────────── */
 :root {
-  /* Colores base */
-  --bg: #ffffff;
-  --fg: #111111;
-  --muted: #555555;
-  --header-bg: #000000;
-  --link: #222222;
-  --link-hover: #6c9be2;
-  --accent: #6c9be2;
-  --accent-hover: hsl(216,100%,83%);
+  /* Colores base  */
+  --bg: #fafafa;
+  --fg: #1a1a1a;
+  --muted: #6b7280;
+  --header-bg: #0f172a;
+  --link: #81a2ea;
+  --link-hover: #3b82f6;
+  --accent: #3b82f6;
+  --accent-hover: #60a5fa;
   --card-bg: #ffffff;
-  --card-shadow: rgba(0,0,0,0.04);
+  --card-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  --border: #e5e7eb;
 
-  /* Accesibilidad */
+  /* accesibilidad */
   --vision-bg: #ffffff;
-  --vision-border: #ccc;
-  --vision-btn-color: #333;
-  --acc-btn-bg: #ff0066;
+  --vision-border: #d1d5db;
+  --vision-btn-color: #374151;
+  --acc-btn-bg: #3b82f6;
   --acc-btn-color: #ffffff;
 }
 
@@ -29,21 +27,21 @@
    MODO OSCURO (dark-mode)
 ────────────────────────────────────────────────────────────────── */
 body.dark-mode {
-  /* Override variables base */
-  --bg: #111111;
-  --fg: #e5e5e5;
-  --muted: #cccccc;
-  --header-bg: #111111;
-  --link: #ffffff;
-  --link-hover: #bbbbbb;
-  --card-bg: #222222;
-  --card-shadow: rgba(0,0,0,0.5);
+  --bg: #0f172a;
+  --fg: #f1f5f9;
+  --muted: #cbd5e1;
+  --header-bg: #020617;
+  --link: #60a5fa;
+  --link-hover: #93c5fd;
+  --card-bg: #1e293b;
+  --card-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  --border: #334155;
 
   /* Accesibilidad */
-  --vision-bg: #474747;
-  --vision-border: #333333;
-  --vision-btn-color: #e0e0e0;
-  --acc-btn-bg: #000000;
+  --vision-bg: #1e293b;
+  --vision-border: #475569;
+  --vision-btn-color: #f1f5f9;
+  --acc-btn-bg: #1e40af;
   --acc-btn-color: #ffffff;
 }
 
@@ -51,84 +49,133 @@ body.dark-mode {
    ALTO CONTRASTE (high-contrast)
 ────────────────────────────────────────────────────────────────── */
 body.high-contrast {
-  /* Override variables base */
   --bg: #000000;
   --fg: #ffff00;
   --muted: #ffffff;
   --header-bg: #000000;
   --link: #ffff00;
-  --link-hover: #ff0;
+  --link-hover: #ffff66;
   --card-bg: #000000;
-  --card-shadow: rgba(255,255,0,0.8);
+  --card-shadow: 0 4px 15px rgba(255,255,0,0.3);
+  --border: #ffff00;
 
   /* Accesibilidad */
   --vision-bg: #000000;
-  --vision-border: #FFFFFF;
+  --vision-border: #ffff00;
   --vision-btn-color: #000000;
-  --acc-btn-bg: #ffff00cd;
-  --acc-btn-color: #fffdfd;
+  --acc-btn-bg: #ffff00;
+  --acc-btn-color: #000000;
 }
 
 /* ──────────────────────────────────────────────────────────────────
    FILTROS DALTONISMO
 ────────────────────────────────────────────────────────────────── */
-body.protanopia   { filter: sepia(.5) hue-rotate(45deg) contrast(1.2); }
-body.deuteranopia { filter: sepia(.5) hue-rotate(20deg) contrast(1.2); }
-body.tritanopia   { filter: sepia(.5) hue-rotate(90deg) contrast(1.2); }
-
-/* ──────────────────────────────────────────────────────────────────
-   AUMENTO DE TEXTO
-────────────────────────────────────────────────────────────────── */
-html.enlarge-1 { font-size: 120%; }
-html.enlarge-2 { font-size: 140%; }
-html.enlarge-3 { font-size: 160%; }
-
-/* ──────────────────────────────────────────────────────────────────
-   INPUTS EN dark-mode / high-contrast
-────────────────────────────────────────────────────────────────── */
-body.dark-mode input[type="text"],
-body.dark-mode textarea,
-body.dark-mode input[type="file"],
-body.high-contrast input[type="text"],
-body.high-contrast textarea,
-body.high-contrast input[type="file"] {
-  background: var(--card-bg) !important;
-  color: var(--fg) !important;
-  border: 1px solid var(--vision-border) !important;
+body.protanopia   { 
+  filter: sepia(0.6) hue-rotate(40deg) contrast(1.1) brightness(1.1); 
 }
-body.dark-mode ::placeholder,
-body.high-contrast ::placeholder {
+body.deuteranopia { 
+  filter: sepia(0.5) hue-rotate(15deg) contrast(1.1) brightness(1.05); 
+}
+body.tritanopia   { 
+  filter: sepia(0.7) hue-rotate(80deg) contrast(1.2) brightness(1.1); 
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   TAMAÑOS DE TEXTO
+────────────────────────────────────────────────────────────────── */
+html.enlarge-1 { font-size: 118%; }
+html.enlarge-2 { font-size: 135%; }
+html.enlarge-3 { font-size: 150%; }
+
+html.reduce-1 { font-size: 92%; }
+html.reduce-2 { font-size: 85%; }
+html.reduce-3 { font-size: 78%; }
+
+/* ──────────────────────────────────────────────────────────────────
+   CAMBIO DE FUENTE
+────────────────────────────────────────────────────────────────── */
+html.font-alt body,
+html.font-alt input,
+html.font-alt textarea,
+html.font-alt button,
+html.font-alt a,
+html.font-alt p,
+html.font-alt h1, html.font-alt h2, html.font-alt h3, 
+html.font-alt h4, html.font-alt h5, html.font-alt h6,
+html.font-alt span, html.font-alt div, html.font-alt label {
+  font-family: 'OpenDyslexic', 'Comic Sans MS', cursive, Arial, sans-serif !important;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   CURSOR 
+────────────────────────────────────────────────────────────────── */
+body.cursor-large,
+body.cursor-large * {
+  cursor: url('../images/cursor.cur') 16 16, auto !important;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   OCULTAR ELEMENTOS
+────────────────────────────────────────────────────────────────── */
+body.no-images img { 
+  display: none !important; 
+}
+
+body.no-images::after {
+  content: '🖼️ Imágenes ocultas';
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--accent);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  z-index: 1000;
+}
+
+body.no-links a {
+  pointer-events: none;
+  text-decoration: underline !important;
   color: var(--muted) !important;
+  opacity: 0.6;
+  position: relative;
+}
+
+body.no-links a::after {
+  content: '🔗';
+  margin-left: 0.25rem;
 }
 
 /* ──────────────────────────────────────────────────────────────────
-   OVERRIDES GLOBALES PARA QUE dark-mode / high-contrast
-   AFECTEN TODA LA PÁGINA
+   OVERRIDES PARA MODOS OSCURO Y ALTO CONTRASTE
 ────────────────────────────────────────────────────────────────── */
 body.dark-mode,
 body.high-contrast {
   background-color: var(--bg) !important;
   color: var(--fg) !important;
 }
+
 body.dark-mode a,
 body.high-contrast a {
   color: var(--link) !important;
 }
+
 body.dark-mode a:hover,
 body.high-contrast a:hover {
   color: var(--link-hover) !important;
 }
+
 body.dark-mode header,
-body.dark-mode nav,
-body.dark-mode main,
-body.dark-mode footer,
+body.dark-mode .header-top,
+body.dark-mode .header-nav,
 body.high-contrast header,
-body.high-contrast nav,
-body.high-contrast main,
-body.high-contrast footer {
+body.high-contrast .header-top,
+body.high-contrast .header-nav {
   background-color: var(--header-bg) !important;
   color: var(--fg) !important;
 }
+
 body.dark-mode .post,
 body.dark-mode .post-card,
 body.dark-mode .panel-card,
@@ -137,58 +184,116 @@ body.high-contrast .post-card,
 body.high-contrast .panel-card {
   background-color: var(--card-bg) !important;
   color: var(--fg) !important;
-  box-shadow: 0 2px 8px var(--card-shadow) !important;
+  border-color: var(--border) !important;
+  box-shadow: var(--card-shadow) !important;
+}
+
+body.dark-mode footer,
+body.high-contrast footer {
+  background-color: var(--card-bg) !important;
+  border-color: var(--border) !important;
+  color: var(--fg) !important;
 }
 
 /* ──────────────────────────────────────────────────────────────────
-   SIDEBAR DE ACCESIBILIDAD
+   INPUTS EN MODOS OSCURO Y ALTO CONTRASTE
+────────────────────────────────────────────────────────────────── */
+body.dark-mode input[type="text"],
+body.dark-mode input[type="password"],
+body.dark-mode textarea,
+body.dark-mode input[type="file"],
+body.high-contrast input[type="text"],
+body.high-contrast input[type="password"],
+body.high-contrast textarea,
+body.high-contrast input[type="file"] {
+  background: var(--card-bg) !important;
+  color: var(--fg) !important;
+  border-color: var(--border) !important;
+}
+
+body.dark-mode ::placeholder,
+body.high-contrast ::placeholder {
+  color: var(--muted) !important;
+}
+
+body.dark-mode input:focus,
+body.dark-mode textarea:focus,
+body.high-contrast input:focus,
+body.high-contrast textarea:focus {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2) !important;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   BOTONES EN MODOS OSCURO Y ALTO CONTRASTE
+────────────────────────────────────────────────────────────────── */
+body.dark-mode .btn-primary,
+body.dark-mode button[type="submit"],
+body.high-contrast .btn-primary,
+body.high-contrast button[type="submit"] {
+  background: var(--accent) !important;
+  color: var(--acc-btn-color) !important;
+}
+
+body.dark-mode .btn-secondary,
+body.high-contrast .btn-secondary {
+  border-color: var(--border) !important;
+  color: var(--fg) !important;
+}
+
+body.dark-mode .btn-secondary:hover,
+body.high-contrast .btn-secondary:hover {
+  background: var(--fg) !important;
+  color: var(--bg) !important;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   ÍCONOS Y ACCIONES
+────────────────────────────────────────────────────────────────── */
+body.dark-mode .action-icon,
+body.high-contrast .action-icon {
+  background: rgba(59, 130, 246, 0.2) !important;
+  color: var(--accent) !important;
+}
+
+body.dark-mode .action-icon:hover,
+body.high-contrast .action-icon:hover {
+  background: var(--accent) !important;
+  color: var(--acc-btn-color) !important;
+}
+
+body.dark-mode .action-icon svg,
+body.high-contrast .action-icon svg {
+  fill: currentColor !important;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   SIDEBAR DE ACCESIBILIDAD 
 ────────────────────────────────────────────────────────────────── */
 #accessibility-sidebar {
-  position: fixed;
-  top: 0; left: 0;
-  width: 260px; height: 100%;
-  background: var(--header-bg);
-  box-shadow: 2px 0 8px rgba(0,0,0,0.2);
-  transform: translateX(-100%);
-  transition: transform .3s ease;
-  z-index: 2000;
-  padding: 1rem;
-  overflow-y: auto;
-}
-#accessibility-sidebar.open {
-  transform: translateX(0);
-}
-#close-accessibility {
-  position: absolute;
-  top: .5rem; right: .5rem;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  color: #fff;
-  cursor: crosshair;
+  background: linear-gradient(180deg, var(--header-bg), #1e293b) !important;
+  backdrop-filter: blur(10px);
 }
 
-/* ──────────────────────────────────────────────────────────────────
-   BOTONES INTERIORES (solo texto, hover con fondo)
-────────────────────────────────────────────────────────────────── */
-#accessibility-bar {
-  display: flex;
-  flex-direction: column;
-  gap: .75rem;
-  margin-top: 1rem;
+#accessibility-sidebar h3 {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 1.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
 }
-#accessibility-bar button {
-  background: transparent;
-  color: var(--acc-btn-color);
-  border: none;
-  padding: .6rem 0;
-  text-align: left;
-  cursor: crosshair;
-  transition: background .2s, opacity .2s;
+
+#accessibility-sidebar #accessibility-bar button {
+  background: rgba(255,255,255,0.08) !important;
+  border: 1px solid rgba(255,255,255,0.15) !important;
+  border-radius: 10px !important;
+  transition: all 0.2s ease !important;
 }
-#accessibility-bar button:hover {
-  background: var(--acc-btn-bg);
-  opacity: .8;
+
+#accessibility-sidebar #accessibility-bar button:hover {
+  background: rgba(255,255,255,0.15) !important;
+  border-color: rgba(255,255,255,0.25) !important;
 }
 
 /* ──────────────────────────────────────────────────────────────────
@@ -199,94 +304,94 @@ body.high-contrast .panel-card {
 }
 #simulate-vision-btn .arrow {
   display: inline-block;
-  width: .5rem;
-  height: .5rem;
-  margin-left: .5rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-left: 0.5rem;
   border-right: 2px solid #fff;
   border-bottom: 2px solid #fff;
   transform: rotate(45deg);
-  transition: transform .2s;
+  transition: transform 0.2s ease;
 }
 #simulate-vision-btn[aria-expanded="true"] .arrow {
   transform: rotate(-135deg);
 }
 
-/* Opciones de daltonismo ocultas por defecto */
+/* ──────────────────────────────────────────────────────────────────
+   OPCIONES DE DALTONISMO OCULTAS POR DEFECTO
+────────────────────────────────────────────────────────────────── */
 #accessibility-sidebar #vision-modes {
   display: none;
-  margin: .5rem 0 1rem;
+  margin: 0.5rem 0 1rem;
   padding: 0 1rem;
 }
-/* Se muestran solo con .open */
 #accessibility-sidebar #vision-modes.open {
   display: block;
 }
-/* Estilo de cada opción */
 #accessibility-sidebar #vision-modes button {
   display: block;
   width: 100%;
   background: none !important;
   border: none;
-  padding: .5rem 0;
-  color: var(--vision-border) !important;
+  padding: 0.5rem 0;
   text-align: left;
   cursor: pointer;
 }
 
-/* Nuevas opciones de accesibilidad */
-
-/* Reducción de texto */
-html.reduce-1 { font-size: 90%; }
-html.reduce-2 { font-size: 80%; }
-html.reduce-3 { font-size: 70%; }
-
-/* Cambio de fuente */
-html.font-alt { font-family: 'Arial', sans-serif !important; }
-
-/* Cambios del cursor */
-body.cursor-large { cursor: zoom-in !important; }
-
-/* Ocultar imágenes */
-body.no-images img { display: none !important; }
-
-/* Ocultar links y resaltarlos */
-body.no-links a {
-  pointer-events: none;
-  text-decoration: underline !important;
-  color: #70fdff !important;
-  opacity: 0.7;
+/* ──────────────────────────────────────────────────────────────────
+   CIERRE DEL SIDEBAR DE ACCESIBILIDAD
+────────────────────────────────────────────────────────────────── */
+#accessibility-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 100%;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 10000;
+}
+#accessibility-sidebar.open {
+  transform: translateX(0);
+}
+#close-accessibility {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: #fff;
+  cursor: pointer;
+}
+/* ──────────────────────────────────────────────────────────────────
+     SCROLL
+────────────────────────────────────────────────────────────────── */
+#accessibility-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 100vh;               
+  overflow-y: auto;            
+  overflow-x: hidden;          
+  -webkit-overflow-scrolling: touch; 
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 2000;
 }
 
-body.cursor-large,
-body.cursor-large * {
-  cursor: url('../images/cursor.cur'), auto !important;
+#accessibility-toggle:hover ~ #accessibility-sidebar,
+#accessibility-sidebar:hover {
+  transform: translateX(0);
 }
 
-
-html.font-alt body,
-html.font-alt input,
-html.font-alt textarea,
-html.font-alt button,
-html.font-alt a,
-html.font-alt p,
-html.font-alt h1, html.font-alt h2, html.font-alt h3, html.font-alt h4, html.font-alt h5, html.font-alt h6,
-html.font-alt span, html.font-alt div, html.font-alt label {
-  font-family: 'OpenDyslexic', Arial,  sans-serif !important;
+#accessibility-sidebar::-webkit-scrollbar {
+  width: 8px;
 }
-
-/* Íconos en index.php (SVG o íconos de fuente) */
-body.dark-mode .action-icon i,
-body.high-contrast .action-icon i,
-body.dark-mode .action-icon svg,
-body.high-contrast .action-icon svg {
-  color: var(--link) !important;
-  fill: var(--link) !important;
+#accessibility-sidebar::-webkit-scrollbar-thumb {
+  background-color: rgba(59,130,246,0.4);
+  border-radius: 4px;
 }
-
-body.dark-mode .action-icon:hover i,
-body.high-contrast .action-icon:hover i,
-body.dark-mode .action-icon:hover svg,
-body.high-contrast .action-icon:hover svg {
-  color: var(--link-hover) !important;
-  fill: var(--link-hover) !important;
+#accessibility-sidebar::-webkit-scrollbar-track {
+  background: transparent;
 }
