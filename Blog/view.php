@@ -23,31 +23,8 @@ $post = getPost($id);
 </head>
 <body>
   <!-- HEADER -->
-  <header>
-    <div class="logo">Mini Blog</div>
-    <nav>
-      <a href="index.php">Inicio</a>
-      <?php if (isset($_SESSION['user'])): ?>
-        <a href="main.php">Panel</a>
-        <a href="login.php?logout=1">Salir (<?= htmlspecialchars($_SESSION['user']) ?>)</a>
-      <?php else: ?>
-        <a href="login.php">Login</a>
-      <?php endif; ?>
-    </nav>
-    <div id="accessibility-bar">
-      <button id="toggle-dark">Modo oscuro</button>
-      <button id="toggle-contrast">Modo contraste</button>
-      <button id="text-toggle">Aumentar texto</button>
-      <button id="reset-accessibility">Resetear accesibilidad</button>
-      <button id="simulate-vision-btn">Modo accesible</button>
-      <div id="vision-modes">
-        <button data-mode="normal">Visión normal</button>
-        <button data-mode="protanopia">Protanopia</button>
-        <button data-mode="deuteranopia">Deuteranopia</button>
-        <button data-mode="tritanopia">Tritanopia</button>
-      </div>
-    </div>
-  </header>
+<?php include 'header.php'; ?>
+
 
   <!-- CONTENIDO PRINCIPAL -->
   <main class="container">

@@ -1,160 +1,292 @@
 
 
-/* -------------------------------
-   Variables por defecto
----------------------------------*/
+
+/* ──────────────────────────────────────────────────────────────────
+   VARIABLES
+────────────────────────────────────────────────────────────────── */
 :root {
+  /* Colores base */
+  --bg: #ffffff;
+  --fg: #111111;
+  --muted: #555555;
+  --header-bg: #000000;
+  --link: #222222;
+  --link-hover: #6c9be2;
+  --accent: #6c9be2;
+  --accent-hover: hsl(216,100%,83%);
+  --card-bg: #ffffff;
+  --card-shadow: rgba(0,0,0,0.04);
+
+  /* Accesibilidad */
   --vision-bg: #ffffff;
   --vision-border: #ccc;
   --vision-btn-color: #333;
+  --acc-btn-bg: #ff0066;
+  --acc-btn-color: #ffffff;
 }
 
-/* -------------------------------
-   MODO OSCURO AJUSTADO
----------------------------------*/
+/* ──────────────────────────────────────────────────────────────────
+   MODO OSCURO (dark-mode)
+────────────────────────────────────────────────────────────────── */
 body.dark-mode {
-  --bg: #121212;
-  --fg: #e0e0e0;
-  --muted: #b0b0b0;
-  --header-bg: #000000;
-  --link: #82aaff;
-  --link-hover: #a3ccff;
-  --card-bg: #1f1f1f;
+  /* Override variables base */
+  --bg: #111111;
+  --fg: #e5e5e5;
+  --muted: #cccccc;
+  --header-bg: #111111;
+  --link: #ffffff;
+  --link-hover: #bbbbbb;
+  --card-bg: #222222;
   --card-shadow: rgba(0,0,0,0.5);
-  /* accesibilidad */
-  --acc-btn-bg: #000000;
-  --acc-btn-color: #ffffff;
+
+  /* Accesibilidad */
   --vision-bg: #474747;
   --vision-border: #333333;
   --vision-btn-color: #e0e0e0;
+  --acc-btn-bg: #000000;
+  --acc-btn-color: #ffffff;
 }
 
-/* -------------------------------
-   ALTO CONTRASTE
----------------------------------*/
+/* ──────────────────────────────────────────────────────────────────
+   ALTO CONTRASTE (high-contrast)
+────────────────────────────────────────────────────────────────── */
 body.high-contrast {
+  /* Override variables base */
   --bg: #000000;
-  --fg: #FFFFFF;
-  --muted: #FFFFFF;
+  --fg: #ffff00;
+  --muted: #ffffff;
   --header-bg: #000000;
-  --link: #FFFF00;
-  --link-hover: #FFFF00;
+  --link: #ffff00;
+  --link-hover: #ff0;
   --card-bg: #000000;
-  --card-shadow: rgba(255,255,255,0.2);
-  --btn-bg: #FFFF00;
-  --btn-color: #000000;
-  --btn-border: #000000;
-  --input-bg: #000000;
-  --input-color: #FFFFFF;
-  --input-border: #FFFFFF;
-  --acc-btn-bg: #FFFF00;
-  --acc-btn-color: #000000;
+  --card-shadow: rgba(255,255,0,0.8);
+
+  /* Accesibilidad */
   --vision-bg: #000000;
   --vision-border: #FFFFFF;
-  --vision-btn-color: #FFFFFF;
+  --vision-btn-color: #000000;
+  --acc-btn-bg: #ffff00cd;
+  --acc-btn-color: #fffdfd;
 }
 
-/* -------------------------------
-   Daltonismos
----------------------------------*/
+/* ──────────────────────────────────────────────────────────────────
+   FILTROS DALTONISMO
+────────────────────────────────────────────────────────────────── */
 body.protanopia   { filter: sepia(.5) hue-rotate(45deg) contrast(1.2); }
 body.deuteranopia { filter: sepia(.5) hue-rotate(20deg) contrast(1.2); }
 body.tritanopia   { filter: sepia(.5) hue-rotate(90deg) contrast(1.2); }
 
-/* -------------------------------
-   Aumentar texto (3 niveles)
-   Ahora actúa sobre <html> para escalar rems
----------------------------------*/
+/* ──────────────────────────────────────────────────────────────────
+   AUMENTO DE TEXTO
+────────────────────────────────────────────────────────────────── */
 html.enlarge-1 { font-size: 120%; }
 html.enlarge-2 { font-size: 140%; }
 html.enlarge-3 { font-size: 160%; }
 
-/* -------------------------------
-   Barra de accesibilidad (botones)
----------------------------------*/
+/* ──────────────────────────────────────────────────────────────────
+   INPUTS EN dark-mode / high-contrast
+────────────────────────────────────────────────────────────────── */
+body.dark-mode input[type="text"],
+body.dark-mode textarea,
+body.dark-mode input[type="file"],
+body.high-contrast input[type="text"],
+body.high-contrast textarea,
+body.high-contrast input[type="file"] {
+  background: var(--card-bg) !important;
+  color: var(--fg) !important;
+  border: 1px solid var(--vision-border) !important;
+}
+body.dark-mode ::placeholder,
+body.high-contrast ::placeholder {
+  color: var(--muted) !important;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   OVERRIDES GLOBALES PARA QUE dark-mode / high-contrast
+   AFECTEN TODA LA PÁGINA
+────────────────────────────────────────────────────────────────── */
+body.dark-mode,
+body.high-contrast {
+  background-color: var(--bg) !important;
+  color: var(--fg) !important;
+}
+body.dark-mode a,
+body.high-contrast a {
+  color: var(--link) !important;
+}
+body.dark-mode a:hover,
+body.high-contrast a:hover {
+  color: var(--link-hover) !important;
+}
+body.dark-mode header,
+body.dark-mode nav,
+body.dark-mode main,
+body.dark-mode footer,
+body.high-contrast header,
+body.high-contrast nav,
+body.high-contrast main,
+body.high-contrast footer {
+  background-color: var(--header-bg) !important;
+  color: var(--fg) !important;
+}
+body.dark-mode .post,
+body.dark-mode .post-card,
+body.dark-mode .panel-card,
+body.high-contrast .post,
+body.high-contrast .post-card,
+body.high-contrast .panel-card {
+  background-color: var(--card-bg) !important;
+  color: var(--fg) !important;
+  box-shadow: 0 2px 8px var(--card-shadow) !important;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   SIDEBAR DE ACCESIBILIDAD
+────────────────────────────────────────────────────────────────── */
+#accessibility-sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  width: 260px; height: 100%;
+  background: var(--header-bg);
+  box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+  transform: translateX(-100%);
+  transition: transform .3s ease;
+  z-index: 2000;
+  padding: 1rem;
+  overflow-y: auto;
+}
+#accessibility-sidebar.open {
+  transform: translateX(0);
+}
+#close-accessibility {
+  position: absolute;
+  top: .5rem; right: .5rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #fff;
+  cursor: crosshair;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   BOTONES INTERIORES (solo texto, hover con fondo)
+────────────────────────────────────────────────────────────────── */
 #accessibility-bar {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  gap: .75rem;
+  margin-top: 1rem;
 }
 #accessibility-bar button {
-  margin-left: 10px;
-  padding: 5px 10px;
-  font-size: .9rem;
-  background: var(--acc-btn-bg);
+  background: transparent;
   color: var(--acc-btn-color);
   border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: opacity .3s;
+  padding: .6rem 0;
+  text-align: left;
+  cursor: crosshair;
+  transition: background .2s, opacity .2s;
 }
 #accessibility-bar button:hover {
+  background: var(--acc-btn-bg);
   opacity: .8;
 }
 
-/* -------------------------------
-   Ajustes generales modo oscuro / contraste
----------------------------------*/
-body.dark-mode   header,
-body.high-contrast header {
-  background: var(--header-bg);
+/* ──────────────────────────────────────────────────────────────────
+   DROPDOWN “Modo accesible”
+────────────────────────────────────────────────────────────────── */
+#simulate-vision-btn {
+  position: relative;
 }
-body.dark-mode   #accessibility-bar button,
-body.high-contrast #accessibility-bar button {
-  background: var(--acc-btn-bg);
-  color: var(--acc-btn-color);
-  border: 2px solid var(--btn-border);
+#simulate-vision-btn .arrow {
+  display: inline-block;
+  width: .5rem;
+  height: .5rem;
+  margin-left: .5rem;
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(45deg);
+  transition: transform .2s;
 }
-
-/* -------------------------------
-   Inputs y formularios en contraste
----------------------------------*/
-body.high-contrast input,
-body.high-contrast textarea {
-  background: var(--input-bg);
-  color: var(--input-color);
-  border: 2px solid var(--input-border);
-}
-body.high-contrast form button {
-  background: var(--btn-bg);
-  color: var(--btn-color);
-  border: 2px solid var(--btn-border);
+#simulate-vision-btn[aria-expanded="true"] .arrow {
+  transform: rotate(-135deg);
 }
 
-
-#vision-modes {
-  position: absolute;
+/* Opciones de daltonismo ocultas por defecto */
+#accessibility-sidebar #vision-modes {
   display: none;
-  flex-direction: column;
-  min-width: 110px;
-  padding: 0.5rem 0;
-  background: var(--vision-bg) !important;
-  border: 1px solid var(--vision-border) !important;
-  border-radius: 4px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  z-index: 2000;
-  opacity: 1;
-  pointer-events: auto;
+  margin: .5rem 0 1rem;
+  padding: 0 1rem;
 }
-#vision-modes button {
+/* Se muestran solo con .open */
+#accessibility-sidebar #vision-modes.open {
+  display: block;
+}
+/* Estilo de cada opción */
+#accessibility-sidebar #vision-modes button {
+  display: block;
+  width: 100%;
   background: none !important;
   border: none;
+  padding: .5rem 0;
+  color: var(--vision-border) !important;
   text-align: left;
-  width: 100%;
-  padding: 0.4rem 1rem;
-  font-size: 0.9rem;
-  color: var(--vision-btn-color) !important;
   cursor: pointer;
-  transition: background 0.2s;
 }
-#vision-modes button:hover {
-  background: rgba(0,0,0,0.05);
+
+/* Nuevas opciones de accesibilidad */
+
+/* Reducción de texto */
+html.reduce-1 { font-size: 90%; }
+html.reduce-2 { font-size: 80%; }
+html.reduce-3 { font-size: 70%; }
+
+/* Cambio de fuente */
+html.font-alt { font-family: 'Arial', sans-serif !important; }
+
+/* Cambios del cursor */
+body.cursor-large { cursor: zoom-in !important; }
+
+/* Ocultar imágenes */
+body.no-images img { display: none !important; }
+
+/* Ocultar links y resaltarlos */
+body.no-links a {
+  pointer-events: none;
+  text-decoration: underline !important;
+  color: #70fdff !important;
+  opacity: 0.7;
+}
+
+body.cursor-large,
+body.cursor-large * {
+  cursor: url('../images/cursor.cur'), auto !important;
 }
 
 
-body:not(.dark-mode):not(.high-contrast) #vision-modes {
-  background: #ffffff !important;
-  border-color: #ccc !important;
+html.font-alt body,
+html.font-alt input,
+html.font-alt textarea,
+html.font-alt button,
+html.font-alt a,
+html.font-alt p,
+html.font-alt h1, html.font-alt h2, html.font-alt h3, html.font-alt h4, html.font-alt h5, html.font-alt h6,
+html.font-alt span, html.font-alt div, html.font-alt label {
+  font-family: 'OpenDyslexic', Arial,  sans-serif !important;
 }
-body:not(.dark-mode):not(.high-contrast) #vision-modes button {
-  color: #333333 !important;
+
+/* Íconos en index.php (SVG o íconos de fuente) */
+body.dark-mode .action-icon i,
+body.high-contrast .action-icon i,
+body.dark-mode .action-icon svg,
+body.high-contrast .action-icon svg {
+  color: var(--link) !important;
+  fill: var(--link) !important;
+}
+
+body.dark-mode .action-icon:hover i,
+body.high-contrast .action-icon:hover i,
+body.dark-mode .action-icon:hover svg,
+body.high-contrast .action-icon:hover svg {
+  color: var(--link-hover) !important;
+  fill: var(--link-hover) !important;
 }

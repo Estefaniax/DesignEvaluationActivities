@@ -1,6 +1,4 @@
-/* ===================================================================
-   styles.css - Estilos principales del Mini Blog
-   =================================================================== */
+
 
 /* -------------------------------
    VARIABLES DE DISEÑO
@@ -21,16 +19,13 @@
   --font-base: 'Inter', sans-serif;
   --header-height: 64px;
 }
-/* ——————————————————————————
-   Imágenes responsivas
-———————————————————————————————————— */
+
 img {
   max-width: 100%;
   height: auto;
   display: block;
 }
 
-/* Si usas la clase .post-image */
 
 .post-image {
   max-width: 100%;
@@ -62,14 +57,12 @@ body {
   min-height: 100vh;
 }
 
-/* Text cursor (I-beam) for all text elements, including headings, meta, paragraphs, labels, inputs */
 h1, h2, h3, h4, h5, h6,
 p, span, label, input, textarea,
 .post-meta, .meta {
   cursor: text;
 }
 
-/* Interactive elements keep crosshair */
 button,
 a,
 .post, .post-card,
@@ -163,7 +156,7 @@ header nav a:hover {
   transition: background .2s;
 }
 #vision-modes button:hover {
-  background: rgba(0,0,0,0.05);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 /* -------------------------------
@@ -375,4 +368,101 @@ footer {
 .action-icon .icon {
   width: 1.4rem;
   height: 1.4rem;
+}
+
+/* ——————————————————————————————————
+   Header + Sidebar de accesibilidad
+——————————————————————————————————— */
+.header-top {
+  display: flex;
+  align-items: center;
+  background: var(--header-bg);
+  padding: .5rem var(--spacing);
+}
+.header-top .icon-access {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #fff;
+  cursor: crosshair;
+}
+.header-top .logo {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #fff;
+  margin-left: .75rem;
+}
+.header-nav {
+  display: flex;
+  gap: var(--spacing);
+  background: var(--header-bg);
+  padding: .25rem var(--spacing);
+}
+.header-nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: crosshair;
+}
+
+/* Sidebar */
+#accessibility-sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  width: 260px;
+  height: 100%;
+  background: var(--header-bg);
+  box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+  transform: translateX(-100%);
+  transition: transform .3s ease;
+  z-index: 2000;
+  padding: var(--spacing);
+}
+#accessibility-sidebar.open {
+  transform: translateX(0);
+}
+#close-accessibility {
+  position: absolute;
+  top: .5rem; right: .5rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: crosshair;
+}
+
+/* 1. Ocultar el antiguo toolbar de accesibilidad que estaba en el header */
+header #accessibility-bar {
+  display: none !important;
+}
+
+/* 2. Forzar que, dentro de la sidebar, el toolbar se muestre en columna */
+#accessibility-sidebar #accessibility-bar {
+  display: flex !important;
+  flex-direction: column;
+  gap: .75rem;
+  margin-top: 1rem;
+}
+
+/* 3. Hacer que cada botón llene el ancho de la sidebar */
+#accessibility-sidebar #accessibility-bar button {
+  width: 100%;
+  margin: 0;
+  padding: .6rem;
+  text-align: left;
+}
+
+/* 4. Ajustes al menú de visión para que quede dentro de la sidebar */
+#accessibility-sidebar #vision-modes {
+  position: relative;
+  top: auto;
+  right: auto;
+  box-shadow: none;
+  border: none;
+  background: transparent !important;
+  padding: 0;
+  margin-top: .5rem;
+}
+
+/* 5. Hacer scroll si hay muchas opciones */
+#accessibility-sidebar {
+  overflow-y: auto;
 }

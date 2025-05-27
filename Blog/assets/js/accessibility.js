@@ -1,72 +1,115 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const darkBtn     = document.getElementById('toggle-dark');
+  const body = document.body;
+  const accIcon = document.getElementById('accessibility-toggle');
+  const accSidebar = document.getElementById('accessibility-sidebar');
+  const accCloseBtn = document.getElementById('close-accessibility');
+  const darkBtn = document.getElementById('toggle-dark');
   const contrastBtn = document.getElementById('toggle-contrast');
-  const enlargeBtn  = document.getElementById('text-toggle');
-  const resetBtn    = document.getElementById('reset-accessibility');
-  const simuBtn     = document.getElementById('simulate-vision-btn');
-  const visionBox   = document.getElementById('vision-modes');
-  let level = 0;
+  const enlargeBtn = document.getElementById('text-toggle');
+  const reduceBtn = document.getElementById('reduce-text');
+  const fontBtn = document.getElementById('toggle-font');
+  const cursorBtn = document.getElementById('toggle-cursor');
+  const imagesBtn = document.getElementById('toggle-images');
+  const linksBtn = document.getElementById('toggle-links');
+  const resetBtn = document.getElementById('reset-accessibility');
+  const simuBtn = document.getElementById('simulate-vision-btn');
+  const visionBox = document.getElementById('vision-modes');
 
-  // Carga estado
-  const savedMode   = localStorage.getItem('mode')       || 'none';
-  const savedText   = parseInt(localStorage.getItem('textLevel') || '0', 10);
-  const savedVision = localStorage.getItem('visionMode') || 'normal';
+  let textSizeLevel = parseInt(localStorage.getItem('textSizeLevel') || '0', 10);
 
-  applyMode(savedMode);
-  level = savedText;
-  applyTextLevel(level);
-  applyVisionMode(savedVision);
+  applyMode(localStorage.getItem('mode') || 'none');
+  updateTextSize();
+  applyFont(localStorage.getItem('font') || 'default');
+  applyCursor(localStorage.getItem('cursor') || 'default');
+  applyImages(localStorage.getItem('images') || 'show');
+  applyLinks(localStorage.getItem('links') || 'show');
+  applyVisionMode(localStorage.getItem('visionMode') || 'normal');
 
-  // Eventos
-  darkBtn.addEventListener('click', () => {
-    const newMode = document.body.classList.contains('dark-mode') ? 'none' : 'dark';
-    applyMode(newMode);
-    localStorage.setItem('mode', newMode);
-  });
-  contrastBtn.addEventListener('click', () => {
-    const newMode = document.body.classList.contains('high-contrast') ? 'none' : 'contrast';
-    applyMode(newMode);
-    localStorage.setItem('mode', newMode);
-  });
-  enlargeBtn.addEventListener('click', () => {
-    level = (level + 1) % 4;
-    localStorage.setItem('textLevel', level.toString());
-    applyTextLevel(level);
-  });
-  resetBtn.addEventListener('click', () => {
-    localStorage.setItem('mode', 'none');
-    localStorage.setItem('textLevel', '0');
-    localStorage.setItem('visionMode', 'normal');
-    level = 0;
-    applyMode('none');
-    applyTextLevel(0);
-    applyVisionMode('normal');
-    visionBox.style.display = 'none';
-  });
-  simuBtn.addEventListener('click', () => {
-    visionBox.style.display = visionBox.style.display === 'flex' ? 'none' : 'flex';
-  });
+  // Sidebar
+  accIcon.addEventListener('mouseenter', () => accSidebar.classList.add('open'));
+  accIcon.addEventListener('click', () => accSidebar.classList.add('open'));
+  accCloseBtn.addEventListener('click', () => accSidebar.classList.remove('open'));
+  accSidebar.addEventListener('mouseleave', () => accSidebar.classList.remove('open'));
+
+  // Botones
+  darkBtn.onclick = () => toggleClass('dark-mode', 'mode', 'dark');
+  contrastBtn.onclick = () => toggleClass('high-contrast', 'mode', 'contrast');
+  enlargeBtn.onclick = () => {
+    if (textSizeLevel < 3) textSizeLevel++;
+    updateTextSize();
+  };
+  reduceBtn.onclick = () => {
+    if (textSizeLevel > -3) textSizeLevel--;
+    updateTextSize();
+  };
+  fontBtn.onclick = () => toggleHTMLClass('font-alt', 'font', 'alt');
+  cursorBtn.onclick = () => toggleClass('cursor-large', 'cursor', 'large');
+  imagesBtn.onclick = () => toggleClass('no-images', 'images', 'hide');
+  linksBtn.onclick = () => toggleClass('no-links', 'links', 'hide');
+
+  resetBtn.onclick = () => {
+    localStorage.clear();
+    location.reload();
+  };
+
+  simuBtn.onclick = () => visionBox.classList.toggle('open');
   visionBox.querySelectorAll('button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const vm = btn.dataset.mode;
-      localStorage.setItem('visionMode', vm);
-      applyVisionMode(vm);
-      visionBox.style.display = 'none';
-    });
+    btn.onclick = () => {
+      localStorage.setItem('visionMode', btn.dataset.mode);
+      applyVisionMode(btn.dataset.mode);
+      visionBox.classList.remove('open');
+    };
   });
 
-  // Funciones
+  // Funciones auxiliares
+  function toggleClass(cls, key, val) {
+    const state = body.classList.toggle(cls) ? val : 'none';
+    localStorage.setItem(key, state);
+  }
+
+  function toggleHTMLClass(cls, key, val) {
+    const state = document.documentElement.classList.toggle(cls) ? val : 'default';
+    localStorage.setItem(key, state);
+  }
+
   function applyMode(mode) {
-    document.body.classList.remove('dark-mode','high-contrast');
-    if (mode === 'dark')     document.body.classList.add('dark-mode');
-    if (mode === 'contrast') document.body.classList.add('high-contrast');
+    body.classList.remove('dark-mode', 'high-contrast');
+    if (mode === 'dark') body.classList.add('dark-mode');
+    else if (mode === 'contrast') body.classList.add('high-contrast');
   }
-  function applyTextLevel(lv) {
-    document.documentElement.classList.remove('enlarge-1','enlarge-2','enlarge-3');
-    if (lv > 0) document.documentElement.classList.add(`enlarge-${lv}`);
+
+  function updateTextSize() {
+    document.documentElement.classList.remove(
+      'enlarge-1', 'enlarge-2', 'enlarge-3',
+      'reduce-1', 'reduce-2', 'reduce-3'
+    );
+    const abs = Math.abs(textSizeLevel);
+    if (textSizeLevel > 0) {
+      document.documentElement.classList.add(`enlarge-${abs}`);
+    } else if (textSizeLevel < 0) {
+      document.documentElement.classList.add(`reduce-${abs}`);
+    }
+    localStorage.setItem('textSizeLevel', textSizeLevel);
   }
-  function applyVisionMode(vm) {
-    document.body.classList.remove('protanopia','deuteranopia','tritanopia');
-    if (vm !== 'normal') document.body.classList.add(vm);
+
+  function applyFont(font) {
+    document.documentElement.classList.toggle('font-alt', font === 'alt');
+  }
+
+  function applyCursor(cursor) {
+    body.classList.toggle('cursor-large', cursor === 'large');
+  }
+
+  function applyImages(images) {
+    body.classList.toggle('no-images', images === 'hide');
+  }
+
+  function applyLinks(links) {
+    body.classList.toggle('no-links', links === 'hide');
+  }
+
+  function applyVisionMode(mode) {
+    body.classList.remove('protanopia', 'deuteranopia', 'tritanopia');
+    if (mode !== 'normal') body.classList.add(mode);
   }
 });
