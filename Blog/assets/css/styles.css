@@ -1,3 +1,6 @@
+
+
+
 /* -------------------------------
    VARIABLES DE DISEÑO
 ---------------------------------*/
@@ -611,4 +614,34 @@ header #accessibility-bar {
   .btn-secondary {
     padding: 0.875rem 1.5rem;
   }
+}
+/* Aviso de envío sin cifrado */
+.form-notice {
+  background: #ffece5;
+  border-left: 4px solid #ff3b3b;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  color: #663c00;
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   ESTILOS PARA INPUT EMAIL EN FORMULARIOS
+────────────────────────────────────────────────────────────────── */
+form input[type="email"] {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-family: var(--font-base);
+  background: var(--card-bg);
+  transition: all 0.2s ease;
+}
+
+form input[type="email"]:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }

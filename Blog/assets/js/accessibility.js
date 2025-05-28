@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const simuBtn = document.getElementById('simulate-vision-btn');
   const visionBox = document.getElementById('vision-modes');
 
-  // Nivel de tamaño de texto: -3 .. 0 .. +3
   let textSizeLevel = parseInt(localStorage.getItem('textSizeLevel') || '0', 10);
 
   // Aplicar configuración previa
@@ -38,16 +37,20 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   accSidebar.addEventListener('mouseleave', () => accSidebar.classList.remove('open'));
 
-  // Modos de visualización
+  // Modos de visualización con toggle
   darkBtn.onclick = e => {
     e.stopPropagation();
-    localStorage.setItem('mode', 'dark');
-    applyMode('dark');
+    const current = localStorage.getItem('mode') || 'none';
+    const nextMode = current === 'dark' ? 'none' : 'dark';
+    localStorage.setItem('mode', nextMode);
+    applyMode(nextMode);
   };
   contrastBtn.onclick = e => {
     e.stopPropagation();
-    localStorage.setItem('mode', 'contrast');
-    applyMode('contrast');
+    const current = localStorage.getItem('mode') || 'none';
+    const nextMode = current === 'contrast' ? 'none' : 'contrast';
+    localStorage.setItem('mode', nextMode);
+    applyMode(nextMode);
   };
 
   // Texto: agrandar / reducir
@@ -63,22 +66,18 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // Otras opciones
-  fontBtn.onclick = e => { e.stopPropagation(); toggleHTMLClass('font-alt', 'font', 'alt'); };
+  fontBtn.onclick   = e => { e.stopPropagation(); toggleHTMLClass('font-alt', 'font', 'alt'); };
   cursorBtn.onclick = e => { e.stopPropagation(); toggleClass('cursor-large', 'cursor', 'large'); };
   imagesBtn.onclick = e => { e.stopPropagation(); toggleClass('no-images', 'images', 'hide'); };
-  linksBtn.onclick = e => { e.stopPropagation(); toggleClass('no-links', 'links', 'hide'); };
+  linksBtn.onclick  = e => { e.stopPropagation(); toggleClass('no-links', 'links', 'hide'); };
 
-  // **Resetear todos los ajustes**
+  // Resetear todos los ajustes
   resetBtn.onclick = e => {
     e.stopPropagation();
-    // Limpiar almacenamiento
     localStorage.clear();
-    // Restaurar modo visual
     applyMode('none');
-    // **Reiniciar nivel de texto a 0**
     textSizeLevel = 0;
     updateTextSize();
-    // Restaurar resto de toggles
     applyFont('default');
     applyCursor('default');
     applyImages('show');
@@ -113,16 +112,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function applyMode(mode) {
     body.classList.remove('dark-mode', 'high-contrast');
-    if (mode === 'dark')        body.classList.add('dark-mode');
+    if (mode === 'dark')         body.classList.add('dark-mode');
     else if (mode === 'contrast') body.classList.add('high-contrast');
   }
 
   function updateTextSize() {
-    const classes = ['enlarge-1', 'enlarge-2', 'enlarge-3', 'reduce-1', 'reduce-2', 'reduce-3'];
+    const classes = ['enlarge-1','enlarge-2','enlarge-3','reduce-1','reduce-2','reduce-3'];
     document.documentElement.classList.remove(...classes);
     if (textSizeLevel > 0)      document.documentElement.classList.add(`enlarge-${textSizeLevel}`);
     else if (textSizeLevel < 0) document.documentElement.classList.add(`reduce-${Math.abs(textSizeLevel)}`);
-    // Guardar nivel actual
     localStorage.setItem('textSizeLevel', textSizeLevel);
   }
 

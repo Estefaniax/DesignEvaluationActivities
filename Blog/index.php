@@ -1,7 +1,7 @@
 <?php
-include 'functions.php';   // functions.php ya hace session_start()
+include 'functions.php';   
   
-// Eliminar si viene por índice
+
 if (isset($_GET['delete'])) {
     requireLogin();
     deletePost(intval($_GET['delete']));
@@ -29,7 +29,7 @@ $user  = $_SESSION['user'] ?? null;
 
   <!-- CONTENIDO PRINCIPAL -->
 <main class="container">
-  <h1>¡Bienvenido/a Comienza a compartir ideas, Recicla con nosotros!</h1>
+  <h1>¡Bienvenido/a! Comienza a compartir ideas, Recicla con nosotros</h1>
 
   <?php if (!empty($posts)): ?>
     <?php foreach (array_reverse($posts) as $post): ?>
