@@ -1,3 +1,5 @@
+// assets/js/accessibility.js
+
 document.addEventListener('DOMContentLoaded', () => {
   const body = document.body;
   const accIcon = document.getElementById('accessibility-toggle');
@@ -15,9 +17,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const simuBtn = document.getElementById('simulate-vision-btn');
   const visionBox = document.getElementById('vision-modes');
 
+  // Nivel de tamaño de texto: -3 .. 0 .. +3
   let textSizeLevel = parseInt(localStorage.getItem('textSizeLevel') || '0', 10);
 
-  // Inicialización de modos y ajustes previos
+  // Aplicar configuración previa
   applyMode(localStorage.getItem('mode') || 'none');
   updateTextSize();
   applyFont(localStorage.getItem('font') || 'default');
@@ -26,43 +29,56 @@ document.addEventListener('DOMContentLoaded', () => {
   applyLinks(localStorage.getItem('links') || 'show');
   applyVisionMode(localStorage.getItem('visionMode') || 'normal');
 
-  // Sidebar: abrir y cerrar
+  // Abrir/cerrar sidebar de accesibilidad
   accIcon.addEventListener('mouseenter', () => accSidebar.classList.add('open'));
   accIcon.addEventListener('click', () => accSidebar.classList.add('open'));
-  accCloseBtn.addEventListener('click', (e) => {
+  accCloseBtn.addEventListener('click', e => {
     e.stopPropagation();
     accSidebar.classList.remove('open');
   });
   accSidebar.addEventListener('mouseleave', () => accSidebar.classList.remove('open'));
 
-  // Botones de modo: cambiar directamente, sin requerir desactivar primero
-  darkBtn.onclick = (e) => {
+  // Modos de visualización
+  darkBtn.onclick = e => {
     e.stopPropagation();
     localStorage.setItem('mode', 'dark');
     applyMode('dark');
   };
-  contrastBtn.onclick = (e) => {
+  contrastBtn.onclick = e => {
     e.stopPropagation();
     localStorage.setItem('mode', 'contrast');
     applyMode('contrast');
   };
 
-  // Ajustes de tamaño de texto
-  enlargeBtn.onclick = (e) => { e.stopPropagation(); if (textSizeLevel < 3) textSizeLevel++; updateTextSize(); };
-  reduceBtn.onclick = (e) => { e.stopPropagation(); if (textSizeLevel > -3) textSizeLevel--; updateTextSize(); };
-
-  // Otros toggles de accesibilidad
-  fontBtn.onclick = (e) => { e.stopPropagation(); toggleHTMLClass('font-alt', 'font', 'alt'); };
-  cursorBtn.onclick = (e) => { e.stopPropagation(); toggleClass('cursor-large', 'cursor', 'large'); };
-  imagesBtn.onclick = (e) => { e.stopPropagation(); toggleClass('no-images', 'images', 'hide'); };
-  linksBtn.onclick = (e) => { e.stopPropagation(); toggleClass('no-links', 'links', 'hide'); };
-
-  // Resetear ajustes sin cerrar el sidebar
-  resetBtn.onclick = (e) => {
+  // Texto: agrandar / reducir
+  enlargeBtn.onclick = e => {
     e.stopPropagation();
-    localStorage.clear();
-    applyMode('none');
+    if (textSizeLevel < 3) textSizeLevel++;
     updateTextSize();
+  };
+  reduceBtn.onclick = e => {
+    e.stopPropagation();
+    if (textSizeLevel > -3) textSizeLevel--;
+    updateTextSize();
+  };
+
+  // Otras opciones
+  fontBtn.onclick = e => { e.stopPropagation(); toggleHTMLClass('font-alt', 'font', 'alt'); };
+  cursorBtn.onclick = e => { e.stopPropagation(); toggleClass('cursor-large', 'cursor', 'large'); };
+  imagesBtn.onclick = e => { e.stopPropagation(); toggleClass('no-images', 'images', 'hide'); };
+  linksBtn.onclick = e => { e.stopPropagation(); toggleClass('no-links', 'links', 'hide'); };
+
+  // **Resetear todos los ajustes**
+  resetBtn.onclick = e => {
+    e.stopPropagation();
+    // Limpiar almacenamiento
+    localStorage.clear();
+    // Restaurar modo visual
+    applyMode('none');
+    // **Reiniciar nivel de texto a 0**
+    textSizeLevel = 0;
+    updateTextSize();
+    // Restaurar resto de toggles
     applyFont('default');
     applyCursor('default');
     applyImages('show');
@@ -70,42 +86,43 @@ document.addEventListener('DOMContentLoaded', () => {
     applyVisionMode('normal');
   };
 
-  // Dropdown de simulación de visión
-  simuBtn.onclick = (e) => { e.stopPropagation(); visionBox.classList.toggle('open'); };
+  // Simulación de visión
+  simuBtn.onclick = e => {
+    e.stopPropagation();
+    const isOpen = visionBox.classList.toggle('open');
+    simuBtn.setAttribute('aria-expanded', isOpen);
+  };
   visionBox.querySelectorAll('button').forEach(btn => {
-    btn.onclick = (e) => {
+    btn.onclick = e => {
       e.stopPropagation();
       localStorage.setItem('visionMode', btn.dataset.mode);
       applyVisionMode(btn.dataset.mode);
-      // No cerramos el dropdown para permitir múltiples selecciones
     };
   });
 
   // Funciones auxiliares
   function toggleClass(cls, key, val) {
     const active = body.classList.toggle(cls);
-    const state = active ? val : 'none';
-    localStorage.setItem(key, state);
+    localStorage.setItem(key, active ? val : 'none');
   }
 
   function toggleHTMLClass(cls, key, val) {
     const active = document.documentElement.classList.toggle(cls);
-    const state = active ? val : 'default';
-    localStorage.setItem(key, state);
+    localStorage.setItem(key, active ? val : 'default');
   }
 
   function applyMode(mode) {
-    // Elimina ambos modos antes de aplicar el nuevo
     body.classList.remove('dark-mode', 'high-contrast');
-    if (mode === 'dark') body.classList.add('dark-mode');
+    if (mode === 'dark')        body.classList.add('dark-mode');
     else if (mode === 'contrast') body.classList.add('high-contrast');
   }
 
   function updateTextSize() {
-    const classes = ['enlarge-1','enlarge-2','enlarge-3','reduce-1','reduce-2','reduce-3'];
+    const classes = ['enlarge-1', 'enlarge-2', 'enlarge-3', 'reduce-1', 'reduce-2', 'reduce-3'];
     document.documentElement.classList.remove(...classes);
-    if (textSizeLevel > 0) document.documentElement.classList.add(`enlarge-${Math.abs(textSizeLevel)}`);
+    if (textSizeLevel > 0)      document.documentElement.classList.add(`enlarge-${textSizeLevel}`);
     else if (textSizeLevel < 0) document.documentElement.classList.add(`reduce-${Math.abs(textSizeLevel)}`);
+    // Guardar nivel actual
     localStorage.setItem('textSizeLevel', textSizeLevel);
   }
 

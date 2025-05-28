@@ -1,0 +1,213 @@
+
+@import url('styles.css');
+@import url('accessibility.css');
+
+:root {
+  --link: #81a2ea;
+  --fg: #1a1a1a;
+  --bg: #fafafa;
+  --card-bg: #ffffff;
+  --vision-bg: #ffffff;
+  --vision-border: #475569;
+  --cv-radius: 0.5rem;
+  --cv-gap: 1.5rem;
+}
+
+/* ────────────
+ Contenedor principal del CV ──────────────── */
+.cv-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: var(--cv-radius);
+  box-shadow: var(--card-shadow);
+}
+
+/* ──────────── Cabecera con foto y nombre ──────────── */
+.cv-header {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: var(--cv-gap);
+  align-items: center;
+  margin-bottom: 2rem;
+}
+.cv-header .profile-pic {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--fg);
+}
+.cv-header .info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.cv-header .info h1 {
+  margin: 0;
+  font-size: 2rem;
+  color: var(--link);
+  text-transform: uppercase;
+}
+.cv-header .info p {
+  margin: 0;
+  color: var(--vision-border);
+  font-weight: 600;
+}
+
+/* ────────────
+ Secciones con título “flotante” 
+ ──────────── */
+.cv-section {
+  position: relative;
+  background:  var(--vision-bg);
+  padding: 1.5rem 1rem 1rem;
+  margin-bottom: var(--cv-gap);
+  border-radius: var(--cv-radius);
+  box-shadow: var(--card-shadow);
+}
+.cv-section[data-title]::before {
+  content: attr(data-title);
+  position: absolute;
+  top: -0.75rem;
+  left: 1rem;
+  background: var(--link);
+  color: var(--vision-bg);
+  padding: 0.25rem 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: var(--cv-radius);
+}
+
+/* ────────────
+ Listados de datos personales y ──────────── */
+.cv-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.cv-list li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  color: var(--vision-border);
+}
+.cv-list li strong {
+  width: 120px;
+  flex-shrink: 0;
+}
+
+/* ──────────── 
+Layout de Educación y Habilidades
+────────────*/
+.edu-skill {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--cv-gap);
+}
+
+/* ────────────
+ Etiquetas para lenguajes y niveles 
+ ──────────── */
+.cv-tags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.cv-tags li {
+  background: var(--fg);
+  color: var(--card-bg);
+  padding: 0.3rem 0.8rem;
+  border-radius: var(--cv-radius);
+  font-size: 0.9rem;
+}
+
+/* ────────────
+ Gráfica de idiomas 
+ ──────────── */
+.language-chart {
+  margin-top: 1rem;
+}
+.language-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.language-row span {
+  flex: 0 0 100px;
+  color: var(--vision-border);
+  font-weight: 600;
+}
+.language-bar {
+  flex: 1;
+  height: 0.6rem;
+  background: var(--card-bg);
+  border-radius: var(--cv-radius);
+  overflow: hidden;
+  margin: 0 1rem;
+}
+.language-bar-inner {
+  height: 100%;
+  background: var(--link);
+}
+.language-row .percent {
+  flex: 0 0 40px;
+  text-align: right;
+  color: var(--vision-border);
+  font-size: 0.9rem;
+}
+
+/* ────────────
+ Línea separadora general 
+ ──────────── */
+.cv-divider {
+  height: 2px;
+  background: var(--link);
+  border: none;
+  margin: var(--cv-gap) 0;
+}
+
+/* ────────────
+ Experiencia 
+  ──────────── */
+.experience-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.experience-list li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--vision-border);
+}
+.experience-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.4rem;
+  width: 0.6rem;
+  height: 0.6rem;
+  background: var(--link);
+  border-radius: 50%;
+}
+.experience-list li .year {
+  float: right;
+  background: var(--link);
+  color: #fff;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--cv-radius);
+  font-size: 0.85rem;
+}
+
+/* ────────────
+ Ajustes responsivos 
+ ──────────── */
+@media (max-width: 600px) {
+  .cv-header { grid-template-columns: 1fr; text-align: center; }
+  .edu-skill { grid-template-columns: 1fr; }
+}

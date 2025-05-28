@@ -17,6 +17,7 @@ $user = $_SESSION['user'] ?? null;
 
   <!-- Navegación principal debajo -->
   <nav class="header-nav">
+    <a href="cv.php">CV</a>
     <a href="index.php">Inicio</a>
     <?php if ($user): ?>
       <a href="main.php">Panel</a>
@@ -40,7 +41,7 @@ $user = $_SESSION['user'] ?? null;
       <button id="toggle-links">Mostrar/Ocultar links</button>
       <button id="reset-accessibility">Resetear accesibilidad</button>
       <button id="simulate-vision-btn" aria-expanded="false">
-        Modo accesible <span class="arrow"></span>
+        Daltonismo <span class="arrow"></span>
       </button>
       <div id="vision-modes">
         <button data-mode="normal">Visión normal</button>

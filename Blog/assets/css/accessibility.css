@@ -312,6 +312,10 @@ body.high-contrast .action-icon svg {
   transform: rotate(45deg);
   transition: transform 0.2s ease;
 }
+#simulate-vision-btn .arrow {
+  transform: rotate(45deg);
+}
+
 #simulate-vision-btn[aria-expanded="true"] .arrow {
   transform: rotate(-135deg);
 }
