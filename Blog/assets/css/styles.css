@@ -503,9 +503,6 @@ footer {
   transition: background 0.2s ease;
 }
 
-#close-accessibility:hover {
-  background: rgba(255,255,255,0.2);
-}
 
 #accessibility-sidebar #accessibility-bar {
   display: flex !important;
@@ -617,7 +614,7 @@ header #accessibility-bar {
 }
 /* Aviso de envío sin cifrado */
 .form-notice {
-  background: #ffece5;
+  background: #ffe5e5;
   border-left: 4px solid #ff3b3b;
   padding: 0.75rem 1rem;
   margin-bottom: 1rem;

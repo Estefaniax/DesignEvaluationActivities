@@ -122,7 +122,7 @@ $user  = $_SESSION['user'] ?? null;
   </main>
 
 
-  <footer>&copy; <?= date('Y') ?> Mini Blog. Estefanía  López.</footer>
+  <footer>&copy; <?= date('Y') ?> Mini Blog. ODS 12 Garantizar modalidades de consumo y producción sostenibles.</footer>
   <script src="assets/js/accessibility.js"></script>
 </body>
 </html>

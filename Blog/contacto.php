@@ -117,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </main>
 
   <footer>
-    &copy; <?= date('Y') ?> Mini Blog. Estefanía  López.
+    &copy; <?= date('Y') ?> Mini Blog. ODS 12 Garantizar modalidades de consumo y producción sostenibles.
   </footer>
 
   <script src="assets/js/accessibility.js" defer></script>
