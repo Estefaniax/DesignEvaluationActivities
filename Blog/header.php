@@ -28,7 +28,7 @@ $user = $_SESSION['user'] ?? null;
 
   <!-- Sidebar de accesibilidad -->
   <aside id="accessibility-sidebar" aria-hidden="true">
-    <button id="close-accessibility" aria-label="Cerrar menú"></button>
+    <button id="close-accessibility" aria-label="Cerrar menú">×</button>
     <div id="accessibility-bar">
       <button id="toggle-dark">Modo oscuro</button>
       <button id="toggle-contrast">Modo contraste</button>

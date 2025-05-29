@@ -1,25 +1,25 @@
 // assets/js/accessibility.js
 
+
 document.addEventListener('DOMContentLoaded', () => {
-  const body = document.body;
-  const accIcon = document.getElementById('accessibility-toggle');
-  const accSidebar = document.getElementById('accessibility-sidebar');
+  const body        = document.body;
+  const accIcon     = document.getElementById('accessibility-toggle');
+  const accSidebar  = document.getElementById('accessibility-sidebar');
   const accCloseBtn = document.getElementById('close-accessibility');
-  const darkBtn = document.getElementById('toggle-dark');
+  const darkBtn     = document.getElementById('toggle-dark');
   const contrastBtn = document.getElementById('toggle-contrast');
-  const enlargeBtn = document.getElementById('text-toggle');
-  const reduceBtn = document.getElementById('reduce-text');
-  const fontBtn = document.getElementById('toggle-font');
-  const cursorBtn = document.getElementById('toggle-cursor');
-  const imagesBtn = document.getElementById('toggle-images');
-  const linksBtn = document.getElementById('toggle-links');
-  const resetBtn = document.getElementById('reset-accessibility');
-  const simuBtn = document.getElementById('simulate-vision-btn');
-  const visionBox = document.getElementById('vision-modes');
+  const enlargeBtn  = document.getElementById('text-toggle');
+  const reduceBtn   = document.getElementById('reduce-text');
+  const fontBtn     = document.getElementById('toggle-font');
+  const cursorBtn   = document.getElementById('toggle-cursor');
+  const imagesBtn   = document.getElementById('toggle-images');
+  const linksBtn    = document.getElementById('toggle-links');
+  const resetBtn    = document.getElementById('reset-accessibility');
+  const simuBtn     = document.getElementById('simulate-vision-btn');
+  const visionBox   = document.getElementById('vision-modes');
 
   let textSizeLevel = parseInt(localStorage.getItem('textSizeLevel') || '0', 10);
 
-  // Aplicar configuración previa
   applyMode(localStorage.getItem('mode') || 'none');
   updateTextSize();
   applyFont(localStorage.getItem('font') || 'default');
@@ -28,32 +28,50 @@ document.addEventListener('DOMContentLoaded', () => {
   applyLinks(localStorage.getItem('links') || 'show');
   applyVisionMode(localStorage.getItem('visionMode') || 'normal');
 
-  // Abrir/cerrar sidebar de accesibilidad
-  accIcon.addEventListener('mouseenter', () => accSidebar.classList.add('open'));
-  accIcon.addEventListener('click', () => accSidebar.classList.add('open'));
+  //  ABRIR/CERRAR SIDEBAR DE ACCESIBILIDAD
+
+  accIcon.addEventListener('mouseenter', () => {
+    accSidebar.classList.add('open');
+    accSidebar.style.removeProperty('transform');
+  });
+
+  accIcon.addEventListener('click', () => {
+    accSidebar.classList.add('open');
+    accSidebar.style.removeProperty('transform');
+  });
+
   accCloseBtn.addEventListener('click', e => {
     e.stopPropagation();
     accSidebar.classList.remove('open');
+    accSidebar.style.transform = 'translateX(-100%)';
   });
-  accSidebar.addEventListener('mouseleave', () => accSidebar.classList.remove('open'));
 
-  // Modos de visualización con toggle
+  accSidebar.addEventListener('mouseleave', () => {
+    accSidebar.classList.remove('open');
+    accSidebar.style.removeProperty('transform');
+  });
+
+  // ──────────────────────────────────────────────────────────────────
+  //  TOGGLES DE ACCESIBILIDAD (Modo oscuro, contraste, texto, etc.)
+  // ──────────────────────────────────────────────────────────────────
+
   darkBtn.onclick = e => {
     e.stopPropagation();
-    const current = localStorage.getItem('mode') || 'none';
+    const current  = localStorage.getItem('mode') || 'none';
     const nextMode = current === 'dark' ? 'none' : 'dark';
     localStorage.setItem('mode', nextMode);
     applyMode(nextMode);
   };
+  // Modo alto contraste
   contrastBtn.onclick = e => {
     e.stopPropagation();
-    const current = localStorage.getItem('mode') || 'none';
+    const current  = localStorage.getItem('mode') || 'none';
     const nextMode = current === 'contrast' ? 'none' : 'contrast';
     localStorage.setItem('mode', nextMode);
     applyMode(nextMode);
   };
 
-  // Texto: agrandar / reducir
+  // Aumentar / Reducir texto
   enlargeBtn.onclick = e => {
     e.stopPropagation();
     if (textSizeLevel < 3) textSizeLevel++;
@@ -65,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateTextSize();
   };
 
-  // Otras opciones
+  // Cambiar fuente, cursor, mostrar/ocultar imágenes y links
   fontBtn.onclick   = e => { e.stopPropagation(); toggleHTMLClass('font-alt', 'font', 'alt'); };
   cursorBtn.onclick = e => { e.stopPropagation(); toggleClass('cursor-large', 'cursor', 'large'); };
   imagesBtn.onclick = e => { e.stopPropagation(); toggleClass('no-images', 'images', 'hide'); };
@@ -85,7 +103,9 @@ document.addEventListener('DOMContentLoaded', () => {
     applyVisionMode('normal');
   };
 
-  // Simulación de visión
+  // ──────────────────────────────────────────────────────────────────
+  //  Simulación de visión (Daltonismo)
+  // ──────────────────────────────────────────────────────────────────
   simuBtn.onclick = e => {
     e.stopPropagation();
     const isOpen = visionBox.classList.toggle('open');
@@ -99,7 +119,9 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   });
 
-  // Funciones auxiliares
+  // ──────────────────────────────────────────────────────────────────
+  //  FUNCIONES AUXILIARES
+  // ──────────────────────────────────────────────────────────────────
   function toggleClass(cls, key, val) {
     const active = body.classList.toggle(cls);
     localStorage.setItem(key, active ? val : 'none');
